@@ -20,7 +20,7 @@ class Form(QDialog):
 
     # Greets the user
     def greetings(self):
-        print(f"Hello {self.edit.text()}")
+        print(f"Hello Hello {self.edit.text()}")
 
 if __name__ == '__main__':
     # Create the Qt Application
