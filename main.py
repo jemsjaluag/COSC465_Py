@@ -1,7 +1,6 @@
 import sys
-from PyQt5.QtWidgets import (QLineEdit, QPushButton, QApplication,
-    QVBoxLayout, QDialog, QMainWindow)
-from PyQt5.QtCore import QRect
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
 
 # window dimensions
@@ -36,26 +35,47 @@ class Form2(QDialog):
         textBoxWidth = 80
         textBoxHeight = 30
 
-        # add widgets
+        self.setGeometry(100,100,400,500)
+        self.formGroupBox = QGroupBox("Signup")
 
-        self.userName = QLineEdit("Username")
+        ##### add widgets
+        # username
+        self.usernameLabel = QLabel("Username")
+        self.usernameLabel.setFrameStyle(QFrame.Sunken)
+        self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
+
+        self.userName = QLineEdit()
         self.userName.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.userName.move(20,20)
+        self.usernameLabel.setBuddy(self.userName)
 
-        self.password = QLineEdit("Password")
+        # password
+        self.passwordLabel = QLabel("Password")
+        self.password = QLineEdit()
         self.password.setMinimumSize(textBoxWidth,textBoxHeight)
 
+        # first name
         self.nameBox = QLineEdit("First Name")
         self.nameBox.setMinimumSize(textBoxWidth,textBoxHeight)
 
-
+        # last name
         self.lastNameBox = QLineEdit("Last Name")
         self.lastNameBox.setMinimumSize(textBoxWidth,textBoxHeight)
 
+        # preferred sport
         self.preferredSport = QLineEdit("Preferred Sport")
         self.preferredSport.setMinimumSize(textBoxWidth,textBoxHeight)
 
+        # age
         self.age = QLineEdit("Age") 
         self.age.setMinimumSize(textBoxWidth,textBoxHeight)
+
+        # creating the form layout
+        formLayout = QFormLayout()
+        formLayout.addRow(self.usernameLabel, self.userName)
+        formLayout.addRow(self.passwordLabel, self.password)
+
+        self.formGroupBox.setLayout(formLayout)
 
         # button
         self.button = QPushButton("Submit")
@@ -63,11 +83,16 @@ class Form2(QDialog):
         buttonY = self.button.y()
         self.button.setMaximumSize(80, 40)
         self.button.move(maxWidth / 2, maxHeight)
-        #self.button.setGeometry(buttonX,buttonY, 30, 80)
 
+        # create form
+        #self.createForm()
 
         # layout
         layout = QVBoxLayout()
+        layout.addWidget(self.formGroupBox)
+
+        """
+        layout.addWidget(self.usernameLabel)
         layout.addWidget(self.nameBox)
         layout.addWidget(self.lastNameBox)
         layout.addWidget(self.userName)
@@ -75,6 +100,7 @@ class Form2(QDialog):
         layout.addWidget(self.preferredSport)
         layout.addWidget(self.age)
         layout.addWidget(self.button)
+        """
 
         self.setLayout(layout)
 
@@ -88,14 +114,16 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # Create and show the form
     form = Form2()
-    #form.show()
 
+    """
     window = QMainWindow()
     window.setCentralWidget(form)
-    window.setFixedSize(500, 600)
+    window.setGeometry(750,200,500, 600)
     window.setWindowTitle("elmao")
-
-    window.show()
+    """
+    
+    #window.show()
+    form.show()
 
     # Run the main Qt loop
     sys.exit(app.exec())
