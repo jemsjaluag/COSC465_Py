@@ -59,5 +59,6 @@ if __name__ == '__main__':
     window.addWidget(form)
     window.resize(500, 500)
     window.show()
+    window.setWindowTitle("elmao")
     # Run the main Qt loop
     sys.exit(app.exec())
