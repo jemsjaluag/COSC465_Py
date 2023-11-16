@@ -37,12 +37,14 @@ class Form2(QDialog):
         ##### stylesheets
         self.setStyleSheet(Path('signup.qss').read_text())
         
-
         textBoxWidth = 80
         textBoxHeight = 30
 
+        ### buffer for user info
+
         self.setGeometry(100,100,400,500)
         self.formGroupBox = QGroupBox("Signup")
+
 
         ##### add widgets
         # username
@@ -52,13 +54,13 @@ class Form2(QDialog):
         self.usernameLabel.setFrameStyle(QFrame.Sunken)
         self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
 
-        self.userName = QLineEdit()
-        self.userName.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.usernameLine = QLineEdit()
+        self.usernameLine.setMinimumSize(textBoxWidth,textBoxHeight)
 
         ### password
         self.passwordLabel = QLabel("Password")
-        self.password = QLineEdit()
-        self.password.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.passwordLine = QLineEdit()
+        self.passwordLine.setMinimumSize(textBoxWidth,textBoxHeight)
 
         ### first name
         self.nameBox = QLineEdit("First Name")
@@ -80,15 +82,15 @@ class Form2(QDialog):
         self.createFormFormat()
         
         ### button
-        self.button = QPushButton("Submit")
-        buttonX = self.button.x()
-        buttonY = self.button.y()
-        self.button.setMaximumSize(80, 40)
-        self.button.move(maxWidth / 2, maxHeight)
+        self.button = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.button.centerButtons()
+        self.button.accepted.connect(self.getInfo)
+        self.button.move(300,300)
 
         # main layout
         mainLayout = QVBoxLayout()
         mainLayout.addWidget(self.formGroupBox)
+        mainLayout.addWidget(self.button)
 
         self.setLayout(mainLayout)
 
@@ -96,11 +98,14 @@ class Form2(QDialog):
     ### creates the form format
     def createFormFormat(self):
         formLayout = QFormLayout()
-        formLayout.addRow(self.usernameLabel, self.userName)
-        formLayout.addRow(self.passwordLabel, self.password)
-
+        formLayout.addRow(self.usernameLabel, self.usernameLine)
+        formLayout.addRow(self.passwordLabel, self.passwordLine)
 
         self.formGroupBox.setLayout(formLayout)
+
+    def getInfo(self):
+        username = self.usernameLine.text()
+        print(username)
 
 
 
