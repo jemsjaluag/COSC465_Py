@@ -1,7 +1,8 @@
 import sys
-from PyQt5.QtWidgets import (QLineEdit, QPushButton, QApplication,
-    QVBoxLayout, QDialog, QMainWindow)
-from PyQt5.QtCore import QRect
+from pathlib import Path
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 
 # window dimensions
@@ -33,53 +34,78 @@ class Form2(QDialog):
     def __init__(self, parent=None):
         super(Form2, self).__init__(parent)
 
+        ##### stylesheets
+        self.setStyleSheet(Path('signup.qss').read_text())
+        
         textBoxWidth = 80
         textBoxHeight = 30
 
-        # add widgets
+        ### buffer for user info
 
-        self.userName = QLineEdit("Username")
-        self.userName.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.setGeometry(100,100,400,500)
+        self.formGroupBox = QGroupBox("Signup")
 
-        self.password = QLineEdit("Password")
-        self.password.setMinimumSize(textBoxWidth,textBoxHeight)
 
+        ##### add widgets
+        # username
+        self.usernameLabel = QLabel("Username")
+        font = QFont("Calibri", 13)
+        self.usernameLabel.setFont(font)
+        self.usernameLabel.setFrameStyle(QFrame.Sunken)
+        self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
+
+        self.usernameLine = QLineEdit()
+        self.usernameLine.setMinimumSize(textBoxWidth,textBoxHeight)
+
+        ### password
+        self.passwordLabel = QLabel("Password")
+        self.passwordLine = QLineEdit()
+        self.passwordLine.setMinimumSize(textBoxWidth,textBoxHeight)
+
+        ### first name
         self.nameBox = QLineEdit("First Name")
         self.nameBox.setMinimumSize(textBoxWidth,textBoxHeight)
 
-
+        ### last name
         self.lastNameBox = QLineEdit("Last Name")
         self.lastNameBox.setMinimumSize(textBoxWidth,textBoxHeight)
 
+        ### preferred sport
         self.preferredSport = QLineEdit("Preferred Sport")
         self.preferredSport.setMinimumSize(textBoxWidth,textBoxHeight)
 
+        ### age
         self.age = QLineEdit("Age") 
         self.age.setMinimumSize(textBoxWidth,textBoxHeight)
 
-        # button
-        self.button = QPushButton("Submit")
-        buttonX = self.button.x()
-        buttonY = self.button.y()
-        self.button.setMaximumSize(80, 40)
-        self.button.move(maxWidth / 2, maxHeight)
-        #self.button.setGeometry(buttonX,buttonY, 30, 80)
+        # creating the form layout
+        self.createFormFormat()
+        
+        ### button
+        self.button = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.button.centerButtons()
+        self.button.accepted.connect(self.getInfo)
+        self.button.move(300,300)
+
+        # main layout
+        mainLayout = QVBoxLayout()
+        mainLayout.addWidget(self.formGroupBox)
+        mainLayout.addWidget(self.button)
+
+        self.setLayout(mainLayout)
 
 
-        # layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.nameBox)
-        layout.addWidget(self.lastNameBox)
-        layout.addWidget(self.userName)
-        layout.addWidget(self.password)
-        layout.addWidget(self.preferredSport)
-        layout.addWidget(self.age)
-        layout.addWidget(self.button)
+    ### creates the form format
+    def createFormFormat(self):
+        formLayout = QFormLayout()
+        formLayout.addRow(self.usernameLabel, self.usernameLine)
+        formLayout.addRow(self.passwordLabel, self.passwordLine)
 
-        self.setLayout(layout)
+        self.formGroupBox.setLayout(formLayout)
 
-
-
+    def getInfo(self):
+        username = self.usernameLine.text()
+        print(username)
 
 
 
@@ -88,14 +114,16 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # Create and show the form
     form = Form2()
-    #form.show()
 
+    """
     window = QMainWindow()
     window.setCentralWidget(form)
-    window.setFixedSize(500, 600)
+    window.setGeometry(750,200,500, 600)
     window.setWindowTitle("elmao")
-
-    window.show()
+    """
+    
+    #window.show()
+    form.show()
 
     # Run the main Qt loop
     sys.exit(app.exec())
