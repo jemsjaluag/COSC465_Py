@@ -49,8 +49,6 @@ class Form2(QDialog):
         ##### add widgets
         # username
         self.usernameLabel = QLabel("Username")
-        font = QFont("Calibri", 13)
-        self.usernameLabel.setFont(font)
         self.usernameLabel.setFrameStyle(QFrame.Sunken)
         self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
 
@@ -60,18 +58,22 @@ class Form2(QDialog):
         ### password
         self.passwordLabel = QLabel("Password")
         self.passwordLine = QLineEdit()
+        self.passwordLine.setEchoMode(QLineEdit.EchoMode.Password)
         self.passwordLine.setMinimumSize(textBoxWidth,textBoxHeight)
 
         ### first name
-        self.nameBox = QLineEdit("First Name")
+        self.nameBox = QLineEdit()
+        self.nameBox.setPlaceholderText("First Name")
         self.nameBox.setMinimumSize(textBoxWidth,textBoxHeight)
 
         ### last name
-        self.lastNameBox = QLineEdit("Last Name")
+        self.lastNameBox = QLineEdit()
+        self.lastNameBox.setPlaceholderText("Last Name")
         self.lastNameBox.setMinimumSize(textBoxWidth,textBoxHeight)
 
         ### preferred sport
-        self.preferredSport = QLineEdit("Preferred Sport")
+        self.preferredSport = QComboBox()
+        self.preferredSport.setPlaceholderText("Preferred Sport")
         self.preferredSport.setMinimumSize(textBoxWidth,textBoxHeight)
 
         ### age
@@ -98,14 +100,36 @@ class Form2(QDialog):
     ### creates the form format
     def createFormFormat(self):
         formLayout = QFormLayout()
+        formLayout.setSpacing(12)
         formLayout.addRow(self.usernameLabel, self.usernameLine)
         formLayout.addRow(self.passwordLabel, self.passwordLine)
+
+        # separate hbox for the rest
+        nameVBox = QHBoxLayout()
+        nameVBox.addWidget(self.nameBox)
+        nameVBox.addWidget(self.lastNameBox)
+        formLayout.addRow(nameVBox)
+        formLayout.addRow(self.preferredSport)
+        self.extractSportList()
 
         self.formGroupBox.setLayout(formLayout)
 
     def getInfo(self):
         username = self.usernameLine.text()
         print(username)
+
+    ## extracts sport from the txt file
+    def extractSportList(self):
+        print("stuff")
+        file = open("sports.txt", "r")
+        while True:
+            sport = file.readline()
+            if not sport:
+                break
+            # action
+            self.preferredSport.addItem(sport)
+        file.close()
+
 
 
 

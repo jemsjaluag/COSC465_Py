@@ -1,0 +1,28 @@
+Athletics
+Badminton
+Baseball
+Basketball
+Bowling
+Boxing
+Cricket
+Cycling
+Football
+Golf
+Gymnastics
+Handball
+Hockey
+Horse racing
+Hurling
+Mixed Martial Arts
+Pickleball
+Rugby
+Shooting
+Skiing
+Snooker
+Soccer
+Swimming
+Table tennis
+Tennis
+Volleyball
+Water Polo
+Wrestling

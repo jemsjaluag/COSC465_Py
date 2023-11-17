@@ -1,2 +1,32 @@
 QLineEdit { 
-    background-color: yellow}
+    font-family: Calibri;
+    background-color: yellow;
+    font-size: 20px;
+    padding: 0 px;
+    margin-top: 0 px;
+    margin-bottom: 0 px;
+    font-weight: 300;
+    }
+
+QLineEdit::placeholder {
+    font-size: 15px;
+}
+
+QLabel {
+    font-family: Georgia;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+QComboBox {
+    font-family: Georgia;
+    font-size: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 0px;
+
+}
+
+QFormLayout {
+    padding: 5 px;
+}
