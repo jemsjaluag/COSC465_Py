@@ -47,7 +47,7 @@ class Form2(QDialog):
 
 
         ##### add widgets
-        # username
+        ### username
         self.usernameLabel = QLabel("Username")
         self.usernameLabel.setFrameStyle(QFrame.Sunken)
         self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
@@ -114,9 +114,18 @@ class Form2(QDialog):
 
         self.formGroupBox.setLayout(formLayout)
 
+    ### get the string from line edits
     def getInfo(self):
-        username = self.usernameLine.text()
-        print(username)
+        enteredUsername = self.usernameLine.text()
+        enteredPassword = self.passwordLine.text()
+        enteredName = self.nameBox.text()
+        enteredLast = self.lastNameBox.text()
+        enteredPreferredSport = self.preferredSport.currentText()
+        enteredAge = self.age.text()
+
+        
+        print(f"{enteredUsername}\n{enteredPassword}\n{enteredName}\n" \
+              + f"{enteredLast}\n{enteredPreferredSport}\n{enteredAge}")
 
     ## extracts sport from the txt file
     def extractSportList(self):
@@ -126,7 +135,9 @@ class Form2(QDialog):
             sport = file.readline()
             if not sport:
                 break
-            # action
+            ### action
+            # trim the string first, remove the \n
+            sport = sport.rstrip("\n")
             self.preferredSport.addItem(sport)
         file.close()
 
