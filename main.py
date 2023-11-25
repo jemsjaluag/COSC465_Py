@@ -6,7 +6,7 @@ from PyQt5.QtGui import *
 
 
 # window dimensions
-maxWidth = 500; maxHeight = 600
+maxWidth = 500; maxHeight = 500
 
 class Form(QDialog):
 
@@ -42,43 +42,53 @@ class Form2(QDialog):
 
         ### buffer for user info
 
-        self.setGeometry(100,100,400,500)
+        self.setGeometry(100,100,400,350)
         self.formGroupBox = QGroupBox("Signup")
 
 
-        ##### add widgets
-        ### username
+        ########### add widgets
+        ##### username
         self.usernameLabel = QLabel("Username")
         self.usernameLabel.setFrameStyle(QFrame.Sunken)
         self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
 
         self.usernameLine = QLineEdit()
         self.usernameLine.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.usernameLine.setMaxLength(20)
 
-        ### password
+        ##### password
         self.passwordLabel = QLabel("Password")
         self.passwordLine = QLineEdit()
         self.passwordLine.setEchoMode(QLineEdit.EchoMode.Password)
         self.passwordLine.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.passwordLine.setMaxLength(20)
 
-        ### first name
+        ##### first name
         self.nameBox = QLineEdit()
         self.nameBox.setPlaceholderText("First Name")
         self.nameBox.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.nameBox.setMaxLength(20)
 
-        ### last name
+        ##### last name
         self.lastNameBox = QLineEdit()
         self.lastNameBox.setPlaceholderText("Last Name")
         self.lastNameBox.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.lastNameBox.setMaxLength(20)
 
-        ### preferred sport
+        ##### preferred sport
         self.preferredSport = QComboBox()
         self.preferredSport.setPlaceholderText("Preferred Sport")
         self.preferredSport.setMinimumSize(textBoxWidth,textBoxHeight)
 
-        ### age
-        self.age = QLineEdit("Age") 
+        ##### age
+        self.age = QLineEdit() 
         self.age.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.age.setPlaceholderText("Age")
+        self.age.setMaxLength(3)
+
+        ### warning text
+        self.warningText = QLabel("test text")
+        self.warningText.setObjectName("warning")
 
         # creating the form layout
         self.createFormFormat()
@@ -86,7 +96,12 @@ class Form2(QDialog):
         ### button
         self.button = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         self.button.centerButtons()
+
+        # when OK is clicked, execute selfInfo func
         self.button.accepted.connect(self.getInfo)
+
+        # when Cancel is clicked
+        self.button.rejected.connect(self.reject)
         self.button.move(300,300)
 
         # main layout
@@ -101,15 +116,19 @@ class Form2(QDialog):
     def createFormFormat(self):
         formLayout = QFormLayout()
         formLayout.setSpacing(12)
+
+        # separate hbox for the name
+        nameHBox = QHBoxLayout()
+        nameHBox.addWidget(self.nameBox)
+        nameHBox.addWidget(self.lastNameBox)
+
         formLayout.addRow(self.usernameLabel, self.usernameLine)
         formLayout.addRow(self.passwordLabel, self.passwordLine)
-
-        # separate hbox for the rest
-        nameVBox = QHBoxLayout()
-        nameVBox.addWidget(self.nameBox)
-        nameVBox.addWidget(self.lastNameBox)
-        formLayout.addRow(nameVBox)
+        formLayout.addRow(nameHBox)
+        formLayout.addRow(self.age)
         formLayout.addRow(self.preferredSport)
+        formLayout.addRow(self.warningText)
+
         self.extractSportList()
 
         self.formGroupBox.setLayout(formLayout)
@@ -121,13 +140,21 @@ class Form2(QDialog):
         enteredName = self.nameBox.text()
         enteredLast = self.lastNameBox.text()
         enteredPreferredSport = self.preferredSport.currentText()
-        enteredAge = self.age.text()
 
+        ### value error handling
+        try:
+            enteredAge = int(self.age.text())
+            # age check
+            if enteredAge < 18:
+                self.warningText.setText("Age Warning: Below 18")
         
-        print(f"{enteredUsername}\n{enteredPassword}\n{enteredName}\n" \
-              + f"{enteredLast}\n{enteredPreferredSport}\n{enteredAge}")
+            print(f"{enteredUsername}\n{enteredPassword}\n{enteredName}\n" \
+                + f"{enteredLast}\n{enteredPreferredSport}\n{enteredAge}")
+            
+        except ValueError as vE:
+            self.warningText.setText("Invalid Age")
 
-    ## extracts sport from the txt file
+    ### extracts sport from the txt file
     def extractSportList(self):
         print("stuff")
         file = open("sports.txt", "r")
