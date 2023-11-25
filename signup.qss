@@ -18,6 +18,11 @@ QLabel {
     font-weight: 300;
 }
 
+QLabel#warning {
+    color: #ff0000;
+    font-size: 12 px;
+}
+
 QComboBox {
     font-family: Georgia;
     font-size: 15px;
