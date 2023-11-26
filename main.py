@@ -37,12 +37,15 @@ class Form2(QDialog):
         ##### stylesheets
         self.setStyleSheet(Path('signup.qss').read_text())
         
+        self.windowWidth = 400
+        self.windowHeight = 380
+
         textBoxWidth = 80
         textBoxHeight = 30
 
         ### buffer for user info
 
-        self.setGeometry(100,100,400,350)
+        self.setGeometry(100,100,self.windowWidth,self.windowHeight)
         self.formGroupBox = QGroupBox("Signup")
 
 
@@ -75,6 +78,12 @@ class Form2(QDialog):
         self.lastNameBox.setMinimumSize(textBoxWidth,textBoxHeight)
         self.lastNameBox.setMaxLength(20)
 
+        ##### email
+        self.emailBox = QLineEdit()
+        self.emailBox.setPlaceholderText("Email")
+        self.emailBox.setMinimumSize(textBoxWidth,textBoxHeight)
+        self.emailBox.setMaxLength(15)
+
         ##### preferred sport
         self.preferredSport = QComboBox()
         self.preferredSport.setPlaceholderText("Preferred Sport")
@@ -91,14 +100,14 @@ class Form2(QDialog):
         self.warningText.setObjectName("warning")
 
         # creating the form layout
-        self.createFormFormat()
+        self.__createFormFormat()
         
         ### button
         self.button = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
         self.button.centerButtons()
 
         # when OK is clicked, execute selfInfo func
-        self.button.accepted.connect(self.getInfo)
+        self.button.accepted.connect(self.__getInfo)
 
         # when Cancel is clicked
         self.button.rejected.connect(self.reject)
@@ -113,7 +122,7 @@ class Form2(QDialog):
 
 
     ### creates the form format
-    def createFormFormat(self):
+    def __createFormFormat(self):
         formLayout = QFormLayout()
         formLayout.setSpacing(12)
 
@@ -125,26 +134,33 @@ class Form2(QDialog):
         formLayout.addRow(self.usernameLabel, self.usernameLine)
         formLayout.addRow(self.passwordLabel, self.passwordLine)
         formLayout.addRow(nameHBox)
+        formLayout.addRow(self.emailBox)
         formLayout.addRow(self.age)
         formLayout.addRow(self.preferredSport)
         formLayout.addRow(self.warningText)
 
-        self.extractSportList()
+        self.__extractSportList()
 
         self.formGroupBox.setLayout(formLayout)
 
     ### get the string from line edits
-    def getInfo(self):
+    def __getInfo(self):
         enteredUsername = self.usernameLine.text()
         enteredPassword = self.passwordLine.text()
         enteredName = self.nameBox.text()
         enteredLast = self.lastNameBox.text()
         enteredPreferredSport = self.preferredSport.currentText()
 
-        ### value error handling
+        ##### value error handling
         try:
             enteredAge = int(self.age.text())
-            # age check
+
+            ##### checking
+            # if any field is empty
+            if self.__isEmpty(enteredUsername) or self.__isEmpty(enteredPassword) or self.__isEmpty(enteredName) \
+                    or self.__isEmpty(enteredLast) or self.__isEmpty(enteredPreferredSport):
+                self.warningText.setText("One or more fields is empty")
+        
             if enteredAge < 18:
                 self.warningText.setText("Age Warning: Below 18")
         
@@ -155,7 +171,7 @@ class Form2(QDialog):
             self.warningText.setText("Invalid Age")
 
     ### extracts sport from the txt file
-    def extractSportList(self):
+    def __extractSportList(self):
         print("stuff")
         file = open("sports.txt", "r")
         while True:
@@ -168,6 +184,9 @@ class Form2(QDialog):
             self.preferredSport.addItem(sport)
         file.close()
 
+    ### defines if a variable has empty string
+    def __isEmpty(self, var):
+        return var == ""
 
 
 
@@ -176,13 +195,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     # Create and show the form
     form = Form2()
-
-    """
-    window = QMainWindow()
-    window.setCentralWidget(form)
-    window.setGeometry(750,200,500, 600)
-    window.setWindowTitle("elmao")
-    """
     
     #window.show()
     form.show()
