@@ -1,6 +1,5 @@
 QLineEdit { 
     font-family: Calibri;
-    background-color: yellow;
     font-size: 20px;
     padding: 0 px;
     margin-top: 0 px;
