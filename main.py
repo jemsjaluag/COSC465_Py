@@ -8,27 +8,6 @@ from PyQt5.QtGui import *
 # window dimensions
 maxWidth = 500; maxHeight = 500
 
-class Form(QDialog):
-
-    def __init__(self, parent=None):
-        super(Form, self).__init__(parent)
-        # Create widgets
-        self.edit = QLineEdit("Write my name here")
-        self.button = QPushButton("Show Greetings")
-        # Create layout and add widgets
-        layout = QVBoxLayout()
-        layout.addWidget(self.edit)
-        layout.addWidget(self.button)
-        # Set dialog layout
-        self.setLayout(layout)
-        # Add button signal to greetings slot
-        self.button.clicked.connect(self.greetings)
-
-    # Greets the user
-    def greetings(self):
-        print(f"Hello Hello Hello{self.edit.text()}")
-
-
 class Form2(QDialog):
 
     def __init__(self, parent=None):
@@ -82,7 +61,7 @@ class Form2(QDialog):
         self.emailBox = QLineEdit()
         self.emailBox.setPlaceholderText("Email")
         self.emailBox.setMinimumSize(textBoxWidth,textBoxHeight)
-        self.emailBox.setMaxLength(15)
+        self.emailBox.setMaxLength(30)
 
         ##### preferred sport
         self.preferredSport = QComboBox()
@@ -96,7 +75,7 @@ class Form2(QDialog):
         self.age.setMaxLength(3)
 
         ### warning text
-        self.warningText = QLabel("test text")
+        self.warningText = QLabel()
         self.warningText.setObjectName("warning")
 
         # creating the form layout
@@ -163,6 +142,8 @@ class Form2(QDialog):
         
             if enteredAge < 18:
                 self.warningText.setText("Age Warning: Below 18")
+            else:
+                self.warningText.setText("")        # else reset
         
             print(f"{enteredUsername}\n{enteredPassword}\n{enteredName}\n" \
                 + f"{enteredLast}\n{enteredPreferredSport}\n{enteredAge}")
