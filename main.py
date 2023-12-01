@@ -137,13 +137,12 @@ class Form2(QDialog):
             ##### checking
             # if any field is empty
             if self.__isEmpty(enteredUsername) or self.__isEmpty(enteredPassword) or self.__isEmpty(enteredName) \
-                    or self.__isEmpty(enteredLast) or self.__isEmpty(enteredPreferredSport):
+                or self.__isEmpty(enteredLast) or self.__isEmpty(enteredPreferredSport):
                 self.warningText.setText("One or more fields is empty")
-        
+
+
             if enteredAge < 18:
                 self.warningText.setText("Age Warning: Below 18")
-            else:
-                self.warningText.setText("")        # else reset
         
             print(f"{enteredUsername}\n{enteredPassword}\n{enteredName}\n" \
                 + f"{enteredLast}\n{enteredPreferredSport}\n{enteredAge}")
