@@ -1,4 +1,5 @@
 import sys
+from login import Login
 from pathlib import Path
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -33,6 +34,7 @@ class Form2(QDialog):
         self.usernameLabel = QLabel("Username")
         self.usernameLabel.setFrameStyle(QFrame.Sunken)
         self.usernameLabel.setAlignment(Qt.AlignBottom | Qt.AlignLeft)
+        self.usernameLabel.setObjectName("formLabel")
 
         self.usernameLine = QLineEdit()
         self.usernameLine.setMinimumSize(textBoxWidth,textBoxHeight)
@@ -40,6 +42,7 @@ class Form2(QDialog):
 
         ##### password
         self.passwordLabel = QLabel("Password")
+        self.passwordLabel.setObjectName("formLabel")
         self.passwordLine = QLineEdit()
         self.passwordLine.setEchoMode(QLineEdit.EchoMode.Password)
         self.passwordLine.setMinimumSize(textBoxWidth,textBoxHeight)
@@ -173,9 +176,15 @@ class Form2(QDialog):
 if __name__ == '__main__':
     # Create the Qt Application
     app = QApplication(sys.argv)
+
     # Create and show the form
-    form = Form2()
+    #form = Form2()
     
+    ######### testing for login.py #########
+
+    form = Login()
+
+
     #window.show()
     form.show()
 
