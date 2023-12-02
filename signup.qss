@@ -11,6 +11,10 @@ QLineEdit::placeholder {
     font-size: 15px;
 }
 
+QLineEdit#password {
+    margin-bottom: 10px;
+}
+
 QLabel#formLabel {
     font-family: Georgia;
     font-size: 14px;
@@ -22,7 +26,7 @@ QLabel#loginLabel {
     font-size: 40px;
     font-weight: 700;
     outline: 3px solid black;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 QLabel#warning {
@@ -47,13 +51,25 @@ QVBoxLayout#loginVbox {
     padding: 2px;
 }
 
+QPushButton#login {
+  background-color: #0d6efd;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #0d6efd;
+  padding: 5px 15px;
+  margin-top: 3px;
+  outline: 0px;
+}
+
 QPushButton {
   background-color: #0d6efd;
   color: #fff;
   font-weight: 600;
   border-radius: 8px;
   border: 1px solid #0d6efd;
-  padding: 5px 15px;
+  padding: 5px 12px;
   margin-top: 3px;
   outline: 0px;
 }
