@@ -22,11 +22,18 @@ def sign_up_user(email, password, name, preferred_sport, age):
     try:
         user = auth.create_user_with_email_and_password(email, password)
         data = {"Name": name, "Email": email, "PreferredSport": preferred_sport, "Age": age}
-        # Saving the user data in Firestore, not Firebase Realtime Database
         db.collection('Users').document(user["localId"]).set(data)
-        print("Successfully created user account with uid:", user["localId"])
+        return True, "Successfully created user account with uid: " + user["localId"]
     except Exception as e:
-        print("Failed to create user account", e)
+        # Attempt to parse error message
+        try:
+            error_json = json.loads(e.args[1])
+            error_message = error_json['error']['message']
+        except (IndexError, KeyError, json.JSONDecodeError):
+            error_message = str(e)
+
+        return False, "Failed to create user account: " + error_message
+
 
 # Function to log in a user
 def login_user(email, password):
