@@ -39,11 +39,17 @@ def sign_up_user(email, password, name, preferred_sport, age):
 def login_user(email, password):
     try:
         user = auth.sign_in_with_email_and_password(email, password)
-        print("Successfully logged in with uid:", user["localId"])
-        return user
+        return True, "Successfully logged in with uid: " + user["localId"]
     except Exception as e:
-        print("Failed to login", e)
-        return None
+        # Attempt to parse error message
+        try:
+            error_json = json.loads(e.args[1])
+            error_message = error_json['error']['message']
+        except (IndexError, KeyError, json.JSONDecodeError):
+            error_message = str(e)
+
+        return False, "Failed to login: " + error_message
+
 
 # Function to create an event
 def create_event(user_id, location, size_of_party, date_time, cost, sport, description, age_requirement):
