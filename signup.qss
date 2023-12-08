@@ -1,3 +1,70 @@
+
+/******************************
+    LOGIN PAGE 
+
+    color schemes
+    main: #a0bfe0
+    login label: #164b60
+
+*******************************/
+
+QDialog#login {
+    background-color: #a0bfe0
+}
+
+QLabel#loginLabel {
+    font-family: Calibri, cursive;
+    font-size: 40px;
+    font-weight: 700;
+    outline: 3px solid black;
+    letter-spacing: 3px;
+    color: #164b60
+}
+
+QPushButton#login {
+  background-color: #0d6efd;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #0d6efd;
+  padding: 5px 15px;
+  margin-top: 3px;
+  outline: 0px;
+}
+
+QPushButton#signup {
+  background-color: #0d6efd;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid #0d6efd;
+  padding: 5px 12px;
+  margin-top: 3px;
+  outline: 0px;
+}
+
+
+/******************************
+    SIGNUP PAGE 
+
+    color schemes
+    main: #a0bfe0
+    labels: #164b60
+
+*******************************/
+
+QDialog#signup {
+    background-color: #a0bfe0
+}
+
+QLabel {
+    font-family: Georgia;
+    font-size: 15px;
+    font-weight: 300;
+    color: #164b60;
+}
+
 QLineEdit { 
     font-family: Calibri;
     font-size: 20px;
@@ -15,20 +82,6 @@ QLineEdit#password {
     margin-bottom: 10px;
 }
 
-QLabel#formLabel {
-    font-family: Georgia;
-    font-size: 14px;
-    font-weight: 300;
-}
-
-QLabel#loginLabel {
-    font-family: Calibri, cursive;
-    font-size: 40px;
-    font-weight: 700;
-    outline: 3px solid black;
-    letter-spacing: 3px;
-}
-
 QLabel#warning {
     color: #ff0000;
     font-size: 12 px;
@@ -43,33 +96,7 @@ QComboBox {
 
 }
 
-QFormLayout {
-    spacing: 10px;
-}
-
 QVBoxLayout#loginVbox {
     padding: 2px;
 }
 
-QPushButton#login {
-  background-color: #0d6efd;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  border-radius: 8px;
-  border: 1px solid #0d6efd;
-  padding: 5px 15px;
-  margin-top: 3px;
-  outline: 0px;
-}
-
-QPushButton {
-  background-color: #0d6efd;
-  color: #fff;
-  font-weight: 600;
-  border-radius: 8px;
-  border: 1px solid #0d6efd;
-  padding: 5px 12px;
-  margin-top: 3px;
-  outline: 0px;
-}

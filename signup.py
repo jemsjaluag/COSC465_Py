@@ -13,6 +13,8 @@ class Form2(QDialog):
     def __init__(self, parent=None):
         super(Form2, self).__init__(parent)
 
+        self.setObjectName('signup')
+
         # Set window dimensions
         self.windowWidth = 400
         self.windowHeight = 380
@@ -74,8 +76,9 @@ class Form2(QDialog):
     def __createFormFormat(self):
         formLayout = QFormLayout()
         formLayout.setSpacing(12)
+        formLayout.setObjectName('signupForm')
 
-        formLayout.addRow("Name", self.nameBox)
+        formLayout.addRow(QLabel("Name"), self.nameBox)
         formLayout.addRow("Email", self.emailBox)
         formLayout.addRow("Password", self.passwordBox)
         formLayout.addRow("Preferred Sport", self.preferredSport)
@@ -110,11 +113,12 @@ class Form2(QDialog):
         except ValueError:
             self.warningText.setText("Invalid Age")
 
+"""
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     form = Form2()
     form.show()
     sys.exit(app.exec())
 
-
+"""
   

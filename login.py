@@ -9,10 +9,12 @@ class Login(QDialog):
 
     def __init__(self, parent=None):
         super(Login, self).__init__(parent)
+        
+        self.setObjectName("login")
 
        # Create a QLabel for displaying warnings or error messages
         self.warningText = QLabel("")
-        self.warningText.setObjectName("warningText")
+        self.warningText.setObjectName("warning")
         ###### stylesheets
         self.setStyleSheet(Path('signup.qss').read_text())
 
@@ -59,6 +61,7 @@ class Login(QDialog):
          ##### signup button
         self.signupButton = QPushButton("Signup")
         self.signupButton.setFixedSize(100,35)
+        self.signupButton.setObjectName('signup')
         self.signupButton.clicked.connect(self.openSignupForm)  # Connecting the button here
 
 
