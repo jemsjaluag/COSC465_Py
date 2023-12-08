@@ -13,6 +13,7 @@ import sys
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(984, 828)
 
@@ -36,6 +37,7 @@ class Ui_MainWindow(object):
         self.searchHBox.setSpacing(15)
         self.searchHBox.setObjectName("searchHBox")
 
+        ##### search line
         self.searchLine = QtWidgets.QPlainTextEdit(self.layoutWidget)
         self.searchLine.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -47,17 +49,18 @@ class Ui_MainWindow(object):
         self.searchLine.setObjectName("searchLine")
         self.searchHBox.addWidget(self.searchLine)
 
+        ##### search edit
         self.searchButton = QtWidgets.QPushButton(self.layoutWidget)
         self.searchButton.setMaximumSize(QtCore.QSize(100, 16777215))
         self.searchButton.setObjectName("searchButton")
         self.searchHBox.addWidget(self.searchButton)
 
-
+        ##### create event button
         self.createEventButton = QtWidgets.QPushButton(self.frame)
         self.createEventButton.setGeometry(QtCore.QRect(340, 680, 221, 51))
         self.createEventButton.setObjectName("createEventButton")
 
-
+        ##### makes the events VBox scrollable
         self.scrollArea = QtWidgets.QScrollArea(self.frame)
         self.scrollArea.setGeometry(QtCore.QRect(50, 120, 831, 231))
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
@@ -65,6 +68,8 @@ class Ui_MainWindow(object):
         self.scrollArea.setFixedSize(831, 231)
         self.scrollArea.setObjectName("scrollArea")
 
+        ##### to be attached to the scroll area. Attach the widget that needs to 
+        ##### scroll here.
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 812, 229))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
@@ -74,12 +79,13 @@ class Ui_MainWindow(object):
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 831, 231))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         """
-        
+        ##### events Vbox
         self.events = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.events.setContentsMargins(15, 15, 25, 15)
         self.events.setObjectName("events")
         
-
+        ##### events box
+        ##### creates the events and the detail
         self.eventBox1 = EventBox()
         self.events.addWidget(self.eventBox1)
 
@@ -89,7 +95,7 @@ class Ui_MainWindow(object):
         self.eventBox3 = EventBox()
         self.events.addWidget(self.eventBox3)
 
-
+        ##### add the widget attached to the vbox to the scroll area.
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
 
@@ -134,6 +140,7 @@ class Ui_MainWindow(object):
         
         """
 
+        
 
         self.scrollArea_2 = QtWidgets.QScrollArea(self.frame)
         self.scrollArea_2.setGeometry(QtCore.QRect(50, 390, 831, 231))
@@ -145,19 +152,24 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 812, 229))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
 
+        """
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.scrollAreaWidgetContents_2)
         self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(-1, -1, 831, 231))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-
-        self.myEvents = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
+        """
+        
+        self.myEvents = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.myEvents.setContentsMargins(15, 15, 25, 15)
         self.myEvents.setSpacing(8)
         self.myEvents.setObjectName("myEvents")
 
-        self.eventBox_2 = QtWidgets.QGroupBox(self.verticalLayoutWidget_2)
-        self.eventBox_2.setMaximumSize(QtCore.QSize(827, 125))
-        self.eventBox_2.setObjectName("eventBox_2")
+        self.myEvent1 = EventBox()
+        self.myEvents.addWidget(self.myEvent1)
 
+        self.myEvent2 = EventBox()
+        self.myEvents.addWidget(self.myEvent2)
+
+        """
         self.gridLayoutWidget_3 = QtWidgets.QWidget(self.eventBox_2)
         self.gridLayoutWidget_3.setGeometry(QtCore.QRect(9, 19, 771, 111))
         self.gridLayoutWidget_3.setObjectName("gridLayoutWidget_3")
@@ -182,13 +194,24 @@ class Ui_MainWindow(object):
         self.label_13.setObjectName("label_13")
         self.gridLayout_3.addWidget(self.label_13, 2, 1, 1, 1)
         
+        
         self.textEdit_2 = QtWidgets.QTextEdit(self.gridLayoutWidget_3)
         self.textEdit_2.setMaximumSize(QtCore.QSize(300, 40))
         self.textEdit_2.setObjectName("textEdit_2")
         self.gridLayout_3.addWidget(self.textEdit_2, 2, 0, 1, 1)
         self.myEvents.addWidget(self.eventBox_2)
+        """
+
+
+
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.myEventsLabel = QtWidgets.QLabel(self.frame)
+        self.myEventsLabel.setGeometry(QtCore.QRect(50, 270, 100, 200))
+        self.myEventsLabel.setObjectName("myEventsLabel")
+         
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 984, 21))
         self.menubar.setObjectName("menubar")
@@ -205,30 +228,30 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.searchLine.setPlaceholderText(_translate("MainWindow", "Search event..."))
         self.searchButton.setText(_translate("MainWindow", "Search"))
-        self.createEventButton.setText(_translate("MainWindow", "PushButton"))
+        self.createEventButton.setText(_translate("MainWindow", "CreateEvent"))
+        self.myEventsLabel.setText(_translate("MainWindow", "My Events"))
         #self.eventBox.setTitle(_translate("MainWindow", "Event"))
         #self.label_3.setText(_translate("MainWindow", "TextLabel"))
         #self.label.setText(_translate("MainWindow", "TextLabel"))
         #self.label_4.setText(_translate("MainWindow", "TextLabel"))
         #self.label_5.setText(_translate("MainWindow", "TextLabel"))
-        self.eventBox_2.setTitle(_translate("MainWindow", "Event"))
-        self.label_11.setText(_translate("MainWindow", "TextLabel"))
-        self.label_2.setText(_translate("MainWindow", "TextLabel"))
-        self.label_12.setText(_translate("MainWindow", "TextLabel"))
-        self.label_13.setText(_translate("MainWindow", "TextLabel"))
+        #self.eventBox_2.setTitle(_translate("MainWindow", "Event"))
+        #self.label_11.setText(_translate("MainWindow", "TextLabel"))
+        #self.label_2.setText(_translate("MainWindow", "TextLabel"))
+        #self.label_12.setText(_translate("MainWindow", "TextLabel"))
+        #self.label_13.setText(_translate("MainWindow", "TextLabel"))
 
 
 
 
-############### EVENT BOX ###################
-# creates event box with the event details  #
-# params:                                   #
-#   parent              parent widget       #
-#                                           #
-# NOTE: will add a class with all the       #
-#       eventdetails                        #
-#                                           #
-#############################################
+        ############### EVENT BOX ###################
+        # creates event box with the event details  #
+        #                                           #
+        #                                           #
+        # NOTE: will add a class with all the event #
+        #         details                           #
+        #                                           #
+        #############################################
 
 class EventBox(QtWidgets.QGroupBox):
 
@@ -246,35 +269,46 @@ class EventBox(QtWidgets.QGroupBox):
         self.gridLayout.setSpacing(15)
         self.gridLayout.setObjectName("gridLayout")
 
-        self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_3.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 0, 1, 1, 1)
-        self.label = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label.setMaximumSize(QtCore.QSize(300, 30))
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-        self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_4.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 0, 2, 1, 1)
-        self.label_5 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_5.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 2, 1, 1, 1)
+        self.dateTime = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.dateTime.setMaximumSize(QtCore.QSize(300, 30))
+        self.dateTime.setObjectName("dateTime")
+        self.gridLayout.addWidget(self.dateTime, 0, 2, 1, 1)
+        
+        self.eventTitle = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.eventTitle.setMaximumSize(QtCore.QSize(300, 30))
+        self.eventTitle.setObjectName("eventTitle")
+        self.gridLayout.addWidget(self.eventTitle, 0, 0, 1, 1)
+
+        self.sport = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.sport.setMaximumSize(QtCore.QSize(300, 30))
+        self.sport.setObjectName("sport")
+        self.gridLayout.addWidget(self.sport, 0, 1, 1, 1)
+
+        self.location = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.location.setMaximumSize(QtCore.QSize(300, 30))
+        self.location.setObjectName("location")
+        self.gridLayout.addWidget(self.location, 2, 1, 1, 1)
+
+        self.host = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.host.setMaximumSize(QtCore.QSize(300, 30))
+        self.host.setObjectName("host")
+        self.gridLayout.addWidget(self.host, 2, 2, 1, 1)
 
         self.textEdit = QtWidgets.QTextEdit(self.gridLayoutWidget)
         self.textEdit.setMaximumSize(QtCore.QSize(300, 40))
+        self.textEdit.setText("Add description here..")
         self.textEdit.setObjectName("textEdit")
         self.gridLayout.addWidget(self.textEdit, 2, 0, 1, 1)
 
         # translation for whatever idk what for
+        # I think the setText or smthg
         _translate = QtCore.QCoreApplication.translate
         self.setTitle(_translate("MainWindow", "Event"))
-        self.label_3.setText(_translate("MainWindow", "TextLabel"))
-        self.label.setText(_translate("MainWindow", "TextLabel"))
-        self.label_4.setText(_translate("MainWindow", "TextLabel"))
-        self.label_5.setText(_translate("MainWindow", "TextLabel"))
+        self.dateTime.setText(_translate("MainWindow", "Date and Time"))
+        self.eventTitle.setText(_translate("MainWindow", "Event name"))
+        self.location.setText(_translate("MainWindow", "Location"))
+        self.host.setText(_translate("MainWindow", "Host"))
+        self.sport.setText(_translate("MainWindow", "Sport"))
 
 
 
