@@ -166,7 +166,8 @@ class Ui_MainWindow(object):
         self.myEvent1 = EventBox()
         self.myEvents.addWidget(self.myEvent1)
 
-        self.myEvent2 = EventBox()
+        # my cycling event example
+        self.myEvent2 = self.addEvent(EventBox())
         self.myEvents.addWidget(self.myEvent2)
 
         """
@@ -241,17 +242,42 @@ class Ui_MainWindow(object):
         #self.label_12.setText(_translate("MainWindow", "TextLabel"))
         #self.label_13.setText(_translate("MainWindow", "TextLabel"))
 
+    
+    #
+    # adds the details of the events to the event box
+    #
+    def addEvent(self, eventBox):
+        eventTitle = "Cycle Bowie"
+        eventDateTime = "some date and time format"
+        eventSport = "Cycling"
+        eventLocation = "Bowie, MD"
+        eventHost = "James Jaluag"
+        eventDescription = "Fun cycling exercise around Bowie!"
+
+        eventBox.eventTitle.setText(eventTitle)
+        eventBox.dateTime.setText(eventDateTime)
+        eventBox.sport.setText(eventSport)
+        eventBox.location.setText(eventLocation)
+        eventBox.host.setText(eventHost)
+        eventBox.description.setText(eventDescription)
+
+        return eventBox
+
+        
+        
 
 
 
-        ############### EVENT BOX ###################
-        # creates event box with the event details  #
-        #                                           #
-        #                                           #
-        # NOTE: will add a class with all the event #
-        #         details                           #
-        #                                           #
-        #############################################
+
+############### EVENT BOX ###############
+# creates event box with the event      #
+#   details                             #
+#                                       #
+#                                       #
+# NOTE: will add a class with all the   #
+#         details                       #
+#                                       #
+#########################################
 
 class EventBox(QtWidgets.QGroupBox):
 
@@ -294,11 +320,11 @@ class EventBox(QtWidgets.QGroupBox):
         self.host.setObjectName("host")
         self.gridLayout.addWidget(self.host, 2, 2, 1, 1)
 
-        self.textEdit = QtWidgets.QTextEdit(self.gridLayoutWidget)
-        self.textEdit.setMaximumSize(QtCore.QSize(300, 40))
-        self.textEdit.setText("Add description here..")
-        self.textEdit.setObjectName("textEdit")
-        self.gridLayout.addWidget(self.textEdit, 2, 0, 1, 1)
+        self.description = QtWidgets.QTextEdit(self.gridLayoutWidget)
+        self.description.setMaximumSize(QtCore.QSize(300, 40))
+        self.description.setText("Add description here..")
+        self.description.setObjectName("description")
+        self.gridLayout.addWidget(self.description, 2, 0, 1, 1)
 
         # translation for whatever idk what for
         # I think the setText or smthg
