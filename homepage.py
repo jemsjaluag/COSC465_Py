@@ -222,7 +222,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
         ##### my events label
         self.myEventsLabel = QtWidgets.QLabel(self.frame)
-        self.myEventsLabel.setGeometry(QtCore.QRect(50, 310, 100, 200))
+        self.myEventsLabel.setGeometry(QtCore.QRect(50, 305, 100, 200))
         self.myEventsLabel.setObjectName("eventsLabel")
          
         self.setCentralWidget(self.centralwidget)
