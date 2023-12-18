@@ -106,50 +106,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         ##### add the widget attached to the vbox to the scroll area.
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-
-        """
-
-        self.eventBox = QtWidgets.QGroupBox(self.verticalLayoutWidget)
-        self.eventBox.setMaximumSize(QtCore.QSize(827, 125))
-        self.eventBox.setObjectName("eventBox")
-
-        self.gridLayoutWidget = QtWidgets.QWidget(self.eventBox)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(9, 19, 771, 111))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 15)
-        self.gridLayout.setSpacing(15)
-        self.gridLayout.setObjectName("gridLayout")
-
-        self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_3.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 0, 1, 1, 1)
-        self.label = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label.setMaximumSize(QtCore.QSize(300, 30))
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
-        self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_4.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_4.setObjectName("label_4")
-        self.gridLayout.addWidget(self.label_4, 0, 2, 1, 1)
-        self.label_5 = QtWidgets.QLabel(self.gridLayoutWidget)
-        self.label_5.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 2, 1, 1, 1)
-
-        self.textEdit = QtWidgets.QTextEdit(self.gridLayoutWidget)
-        self.textEdit.setMaximumSize(QtCore.QSize(300, 40))
-        self.textEdit.setObjectName("textEdit")
-        self.gridLayout.addWidget(self.textEdit, 2, 0, 1, 1)
-        
-        self.events.addWidget(self.eventBox)
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-        
-        """
-
-        
-
         self.scrollArea_2 = QtWidgets.QScrollArea(self.frame)
         self.scrollArea_2.setGeometry(QtCore.QRect(50, 420, 831, 231))
         self.scrollArea_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
@@ -177,41 +133,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         # my cycling event example
         self.myEvent2 = self.addEvent(EventBox())
         self.myEvents.addWidget(self.myEvent2)
-
-        """
-        self.gridLayoutWidget_3 = QtWidgets.QWidget(self.eventBox_2)
-        self.gridLayoutWidget_3.setGeometry(QtCore.QRect(9, 19, 771, 111))
-        self.gridLayoutWidget_3.setObjectName("gridLayoutWidget_3")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.gridLayoutWidget_3)
-        self.gridLayout_3.setContentsMargins(0, 0, 0, 15)
-        self.gridLayout_3.setSpacing(15)
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.label_11 = QtWidgets.QLabel(self.gridLayoutWidget_3)
-        self.label_11.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_11.setObjectName("label_11")
-        self.gridLayout_3.addWidget(self.label_11, 0, 1, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget_3)
-        self.label_2.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_2.setObjectName("label_2")
-        self.gridLayout_3.addWidget(self.label_2, 0, 0, 1, 1)
-        self.label_12 = QtWidgets.QLabel(self.gridLayoutWidget_3)
-        self.label_12.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_12.setObjectName("label_12")
-        self.gridLayout_3.addWidget(self.label_12, 0, 2, 1, 1)
-        self.label_13 = QtWidgets.QLabel(self.gridLayoutWidget_3)
-        self.label_13.setMaximumSize(QtCore.QSize(300, 30))
-        self.label_13.setObjectName("label_13")
-        self.gridLayout_3.addWidget(self.label_13, 2, 1, 1, 1)
-        
-        
-        self.textEdit_2 = QtWidgets.QTextEdit(self.gridLayoutWidget_3)
-        self.textEdit_2.setMaximumSize(QtCore.QSize(300, 40))
-        self.textEdit_2.setObjectName("textEdit_2")
-        self.gridLayout_3.addWidget(self.textEdit_2, 2, 0, 1, 1)
-        self.myEvents.addWidget(self.eventBox_2)
-        """
-
-
 
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
@@ -265,6 +186,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
     
     #
     # adds the details of the events to the event box
+    #  filled with test items for now.
     #
     def addEvent(self, eventBox:QtWidgets.QGroupBox):
         eventTitle = "Cycle Bowie"
