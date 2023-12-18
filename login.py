@@ -56,9 +56,8 @@ class Login(QDialog):
         self.button.setObjectName("login")
         self.button.clicked.connect(self.__getInfo)
        
-    
 
-         ##### signup button
+        ##### signup button
         self.signupButton = QPushButton("Signup")
         self.signupButton.setFixedSize(100,35)
         self.signupButton.setObjectName('signup')
