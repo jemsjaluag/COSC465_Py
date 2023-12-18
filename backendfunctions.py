@@ -4,7 +4,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 # Load Firebase configuration from JSON file
-config_path = r"C:\Users\gbemi\Desktop\Stay-Active-Local\jsondonotupload\firebase_config.json"
+config_path = r"C:\Users\James\Desktop\StayActive\firebase_config.json"
 with open(config_path, 'r') as config_file:
     config = json.load(config_file)
 
@@ -13,7 +13,7 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()  # This initializes the auth object for Firebase Authentication
 
 # Initialize Firestore with your private key
-cred = credentials.Certificate(r"C:\Users\gbemi\Desktop\Stay-Active-Local\jsondonotupload\stay-active-local-firebase-adminsdk-q7ijl-1adfaf9109.json")
+cred = credentials.Certificate(r"C:\Users\James\Desktop\StayActive\stay-active-local-firebase-adminsdk-q7ijl-1adfaf9109.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()  # This initializes the Firestore client
 
@@ -39,11 +39,17 @@ def sign_up_user(email, password, name, preferred_sport, age):
 def login_user(email, password):
     try:
         user = auth.sign_in_with_email_and_password(email, password)
-        print("Successfully logged in with uid:", user["localId"])
-        return user
+        return True, "Successfully logged in with uid: " + user["localId"]
     except Exception as e:
-        print("Failed to login", e)
-        return None
+        # Attempt to parse error message
+        try:
+            error_json = json.loads(e.args[1])
+            error_message = error_json['error']['message']
+        except (IndexError, KeyError, json.JSONDecodeError):
+            error_message = str(e)
+
+        return False, "Failed to login: " + error_message
+
 
 # Function to create an event
 def create_event(user_id, location, size_of_party, date_time, cost, sport, description, age_requirement):
@@ -100,5 +106,7 @@ def main():
         # Add the same user as an attendee to the event
         add_attendee_to_event(event_id, user_id)
 
+"""
 if __name__ == '__main__':
     main()
+"""
