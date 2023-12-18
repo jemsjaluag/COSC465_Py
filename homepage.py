@@ -94,6 +94,10 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         
         ##### events box
         ##### creates the events and the detail
+
+        #self.eventsList = []
+
+
         self.eventBox1 = EventBox()
         self.events.addWidget(self.eventBox1)
 
