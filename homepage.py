@@ -11,6 +11,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pathlib import Path
 import sys
+from create_event import EventCreatorApp
+from displayeventuser import EventWindow as EventWindowUser
+from displayeventhost import EventWindow as EventWindowHost
 
 class Ui_MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -82,11 +85,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 812, 229))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
 
-        """
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 831, 231))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        """
         ##### events Vbox
         self.events = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.events.setContentsMargins(15, 15, 25, 15)
@@ -94,14 +92,25 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         
         ##### events box
         ##### creates the events and the detail
-        self.eventBox1 = EventBox()
-        self.events.addWidget(self.eventBox1)
 
-        self.eventBox2 = EventBox()
-        self.events.addWidget(self.eventBox2)
+        self.eventsList = []
 
-        self.eventBox3 = EventBox()
-        self.events.addWidget(self.eventBox3)
+
+        self.eventBox1 = EventBox(False)
+       # self.events.addWidget(self.eventBox1)
+        self.eventsList.append(self.eventBox1)
+
+        self.eventBox2 = EventBox(False)
+        #self.events.addWidget(self.eventBox2)
+        self.eventsList.append(self.eventBox2)
+
+        self.eventBox3 = EventBox(False)
+        #self.events.addWidget(self.eventBox3)
+        self.eventsList.append(self.eventBox3)
+
+        ##### event boxes to the events widget
+        for event in self.eventsList:
+            self.events.addWidget(event)
 
         ##### add the widget attached to the vbox to the scroll area.
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -115,24 +124,23 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
         self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 812, 229))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-
-        """
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.scrollAreaWidgetContents_2)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(-1, -1, 831, 231))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        """
         
         self.myEvents = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.myEvents.setContentsMargins(15, 15, 25, 15)
         self.myEvents.setSpacing(8)
         self.myEvents.setObjectName("myEvents")
 
-        self.myEvent1 = EventBox()
-        self.myEvents.addWidget(self.myEvent1)
+        self.myEventsList = []
+
+        self.myEvent1 = EventBox(True)
+        self.myEventsList.append(self.myEvent1)
 
         # my cycling event example
-        self.myEvent2 = self.addEvent(EventBox())
-        self.myEvents.addWidget(self.myEvent2)
+        self.myEvent2 = self.addEvent(EventBox(True))
+        self.myEventsList.append(self.myEvent2)
+
+        for event in self.myEventsList:
+            self.myEvents.addWidget(event)
 
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
@@ -207,7 +215,11 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
         
     def __createEvent(self):
-        print("create event here")
+
+        event = EventCreatorApp(self)
+        event.show()
+
+
 
 
 
@@ -224,8 +236,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
 class EventBox(QtWidgets.QGroupBox):
 
-    def __init__(self, parent=None):
+    def __init__(self, owner, parent=None):
         super(EventBox, self).__init__(parent)
+
+        # signifies if the user is the owner of the event.
+        # bool
+        self.owner = owner
 
         self.setFixedSize(QtCore.QSize(770, 125))
         self.setObjectName("eventBox")
@@ -234,6 +250,7 @@ class EventBox(QtWidgets.QGroupBox):
         self.gridLayoutWidget = QtWidgets.QWidget(self)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(9, 19, 771, 111))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayoutWidget.setContentsMargins(10,0,20,0)
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 15)
         self.gridLayout.setSpacing(15)
@@ -271,6 +288,13 @@ class EventBox(QtWidgets.QGroupBox):
         self.description.setObjectName("description")
         self.gridLayout.addWidget(self.description, 2, 0, 1, 1)
 
+        self.detailsButton = QtWidgets.QPushButton(self.gridLayoutWidget)
+        self.detailsButton.setFixedSize(QtCore.QSize(120,30))
+        self.detailsButton.setContentsMargins(0,10,150,10)
+        self.detailsButton.clicked.connect(self.__detailsButton)
+        self.gridLayout.addWidget(self.detailsButton, 0, 3, 1, 1)
+
+
         # translation for whatever idk what for
         # I think the setText or smthg
         _translate = QtCore.QCoreApplication.translate
@@ -280,6 +304,24 @@ class EventBox(QtWidgets.QGroupBox):
         self.location.setText(_translate("MainWindow", "Location"))
         self.host.setText(_translate("MainWindow", "Host"))
         self.sport.setText(_translate("MainWindow", "Sport"))
+        self.detailsButton.setText(_translate("MainWindow", "Details"))
+
+    ##
+    # opens up the details of the 
+    # event based on the user's ownership
+    ##
+    def __detailsButton(self):
+        # if owner
+        if self.owner:
+            print("Im owner")
+            event = EventWindowHost(self)
+            event.show()
+
+        else:
+            print("just a user")
+            event = EventWindowUser(self)
+            event.show()
+        
 
 
 
