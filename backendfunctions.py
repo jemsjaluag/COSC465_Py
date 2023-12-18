@@ -52,8 +52,9 @@ def login_user(email, password):
 
 
 # Function to create an event
-def create_event(user_id, location, size_of_party, date_time, cost, sport, description, age_requirement):
+def create_event(user_id,event_name,location, size_of_party, date_time, cost, sport, description, age_requirement):
     event_data = {
+        "Event Name": event_name,
         "Location": location,
         "SizeOfParty": size_of_party,
         "DateTime": date_time,
@@ -77,14 +78,14 @@ def add_attendee_to_event(event_id, user_id):
 # Main function to demonstrate usage
 def main():
     # Test user details
-    test_email = "testuser@example.com"
-    test_password = "securePassword123"
+    test_email = "j@j.com"
+    test_password = "123456"
     test_name = "Test User"
     test_preferred_sport = "Basketball"
     test_age = 25
 
     # Sign up a new user
-    sign_up_user(test_email, test_password, test_name, test_preferred_sport, test_age)
+    #sign_up_user(test_email, test_password, test_name, test_preferred_sport, test_age)
 
     # Login the user
     user = login_user(test_email, test_password)
@@ -93,6 +94,7 @@ def main():
 
         # Create a new event
         event_id = create_event(
+            event_name= "Brian Soccer match",
             user_id=user_id,
             location="Central Park",
             size_of_party=50,
