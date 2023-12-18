@@ -85,11 +85,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 812, 229))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
 
-        """
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(-1, -1, 831, 231))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        """
         ##### events Vbox
         self.events = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.events.setContentsMargins(15, 15, 25, 15)
@@ -129,13 +124,6 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.scrollAreaWidgetContents_2 = QtWidgets.QWidget()
         self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 812, 229))
         self.scrollAreaWidgetContents_2.setObjectName("scrollAreaWidgetContents_2")
-
-        """
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.scrollAreaWidgetContents_2)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(-1, -1, 831, 231))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        """
-
         
         self.myEvents = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.myEvents.setContentsMargins(15, 15, 25, 15)
