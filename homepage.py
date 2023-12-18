@@ -326,12 +326,12 @@ class EventBox(QtWidgets.QGroupBox):
         # if owner
         if self.owner:
             print("Im owner")
-            event = EventWindowHost()
+            event = EventWindowHost(self)
             event.show()
 
         else:
             print("just a user")
-            event = EventWindowUser()
+            event = EventWindowUser(self)
             event.show()
         
 
